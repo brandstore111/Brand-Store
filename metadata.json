@@ -1,0 +1,8 @@
+{
+  "name": "Brand Store",
+  "description": "A comprehensive financial services and e-commerce platform for electronic wallet management, shipping tracking, and gadget shopping with dedicated admin and user portals.",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ]
+}
