@@ -23,7 +23,7 @@ const App: React.FC = () => {
       nickname: 'شاهر',
       email: 'shahermagdee@gmail.com',
       phone: '01274790388',
-      password: '@158Afbsh',
+      password: '#Agehn444',
       role: 'USER',
       userType: 'CUSTOMER',
       status: 'APPROVED',
