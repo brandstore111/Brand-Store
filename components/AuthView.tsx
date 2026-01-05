@@ -35,7 +35,7 @@ const AuthView: React.FC<AuthViewProps> = ({ onLogin, users, setUsers }) => {
   };
 
   const handleAuthLogin = () => {
-    // 1. Check Admin Credentials first
+    // 1. التحقق من بيانات المدير أولاً
     const admin = ADMIN_CREDENTIALS.find(a => a.email === email && a.password === password);
     if (admin) {
       onLogin({
@@ -51,7 +51,7 @@ const AuthView: React.FC<AuthViewProps> = ({ onLogin, users, setUsers }) => {
       return;
     }
 
-    // 2. Check regular users
+    // 2. التحقق من المستخدمين العاديين
     const user = users.find(u => 
       (u.email === email || u.phone === email || u.phone === phone) && 
       u.status === 'APPROVED' && 

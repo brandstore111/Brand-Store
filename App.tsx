@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { User, Product, Order, Shipment } from './types';
-import AuthView from './AuthView';
+import AuthView from './components/AuthView';
 import UserDashboard from './components/UserDashboard';
 import AdminDashboard from './components/AdminDashboard';
 import ChatBot from './components/ChatBot';
