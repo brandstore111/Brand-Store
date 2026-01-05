@@ -1,9 +1,10 @@
 
 import React, { useState, useEffect } from 'react';
 import { User, Product, Order, Shipment } from './types';
-import AuthView from './AuthView';
-import UserDashboard from './UserDashboard';
-import ChatBot from './ChatBot';
+import AuthView from './components/AuthView';
+import UserDashboard from './components/UserDashboard';
+import AdminDashboard from './components/AdminDashboard';
+import ChatBot from './components/ChatBot';
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -24,7 +25,7 @@ const App: React.FC = () => {
       email: 'shahermagdee@gmail.com',
       phone: '01274790388',
       password: '#Agehn444',
-      role: 'USER',
+      role: 'ADMIN',
       userType: 'CUSTOMER',
       status: 'APPROVED',
       debt: 0
@@ -51,7 +52,7 @@ const App: React.FC = () => {
     if (savedUser) {
       try {
         const user = JSON.parse(savedUser);
-        if (user && user.role === 'USER') {
+        if (user && (user.role === 'USER' || user.role === 'ADMIN')) {
           setCurrentUser(user);
           setIsLoggedIn(true);
         } else {
@@ -81,15 +82,32 @@ const App: React.FC = () => {
         {!isLoggedIn ? (
           <AuthView onLogin={handleLogin} users={users} setUsers={setUsers} />
         ) : (
-          <UserDashboard 
-            user={currentUser!} 
-            onLogout={handleLogout} 
-            products={products}
-            orders={orders}
-            setOrders={setOrders}
-            shipments={shipments}
-            setShipments={setShipments}
-          />
+          <>
+            {currentUser?.role === 'ADMIN' ? (
+              <AdminDashboard 
+                user={currentUser} 
+                onLogout={handleLogout} 
+                products={products}
+                setProducts={setProducts}
+                users={users}
+                setUsers={setUsers}
+                orders={orders}
+                setOrders={setOrders}
+                shipments={shipments}
+                setShipments={setShipments}
+              />
+            ) : (
+              <UserDashboard 
+                user={currentUser!} 
+                onLogout={handleLogout} 
+                products={products}
+                orders={orders}
+                setOrders={setOrders}
+                shipments={shipments}
+                setShipments={setShipments}
+              />
+            )}
+          </>
         )}
         <ChatBot />
       </div>

@@ -110,7 +110,6 @@ const UserDashboard: React.FC<UserDashboardProps> = ({
           )}
           
           <div className="flex items-center">
-            {/* Minimalist Glowing Text Logo for Header */}
             <span className="text-xl font-black italic tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400 drop-shadow-[0_0_10px_rgba(37,99,235,0.6)]">
               Brand Store
             </span>

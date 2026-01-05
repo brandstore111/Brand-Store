@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { User, CustomerType } from '../types';
-import { TERMS_AND_CONDITIONS } from '../constants';
+import { TERMS_AND_CONDITIONS, ADMIN_CREDENTIALS } from '../constants';
 
 interface AuthViewProps {
   onLogin: (user: User) => void;
@@ -35,6 +35,23 @@ const AuthView: React.FC<AuthViewProps> = ({ onLogin, users, setUsers }) => {
   };
 
   const handleAuthLogin = () => {
+    // 1. Check Admin Credentials first
+    const admin = ADMIN_CREDENTIALS.find(a => a.email === email && a.password === password);
+    if (admin) {
+      onLogin({
+        id: 'admin-' + admin.name,
+        fullName: admin.name,
+        nickname: admin.name,
+        email: admin.email,
+        phone: '',
+        role: 'ADMIN',
+        status: 'APPROVED',
+        debt: 0
+      });
+      return;
+    }
+
+    // 2. Check regular users
     const user = users.find(u => 
       (u.email === email || u.phone === email || u.phone === phone) && 
       u.status === 'APPROVED' && 
@@ -95,7 +112,6 @@ const AuthView: React.FC<AuthViewProps> = ({ onLogin, users, setUsers }) => {
           <div className="w-12"></div>
         </div>
         
-        {/* Stylish Glowing Text Banner */}
         <div className="text-center animate-in zoom-in-95 duration-1000 relative">
           <div className="px-8 py-5 bg-gray-900/40 backdrop-blur-2xl border border-blue-500/30 rounded-[2.5rem] shadow-[0_0_50px_rgba(37,99,235,0.15)] relative overflow-hidden group">
             <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 via-transparent to-indigo-600/5 animate-pulse"></div>
