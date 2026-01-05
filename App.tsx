@@ -1,9 +1,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { User, Product, Order, Shipment } from './types';
-import AuthView from './components/AuthView';
-import UserDashboard from './components/UserDashboard';
-import ChatBot from './components/ChatBot';
+import AuthView from './AuthView';
+import UserDashboard from './UserDashboard';
+import ChatBot from './ChatBot';
 
 const App: React.FC = () => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
@@ -50,7 +50,6 @@ const App: React.FC = () => {
     const savedUser = localStorage.getItem('brand_store_user');
     if (savedUser) {
       const user = JSON.parse(savedUser);
-      // Ensure we are only loading USER accounts in this strictly user-facing version
       if (user && user.role === 'USER') {
         setCurrentUser(user);
         setIsLoggedIn(true);
@@ -74,7 +73,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black flex justify-center overflow-hidden font-sans" dir="rtl">
-      {/* Mobile-centric container */}
       <div className="w-full max-w-[450px] h-screen bg-gray-950 relative shadow-[0_0_100px_rgba(37,99,235,0.15)] flex flex-col overflow-hidden border-x border-gray-800">
         {!isLoggedIn ? (
           <AuthView onLogin={handleLogin} users={users} setUsers={setUsers} />
