@@ -49,11 +49,15 @@ const App: React.FC = () => {
   useEffect(() => {
     const savedUser = localStorage.getItem('brand_store_user');
     if (savedUser) {
-      const user = JSON.parse(savedUser);
-      if (user && user.role === 'USER') {
-        setCurrentUser(user);
-        setIsLoggedIn(true);
-      } else {
+      try {
+        const user = JSON.parse(savedUser);
+        if (user && user.role === 'USER') {
+          setCurrentUser(user);
+          setIsLoggedIn(true);
+        } else {
+          localStorage.removeItem('brand_store_user');
+        }
+      } catch (e) {
         localStorage.removeItem('brand_store_user');
       }
     }
